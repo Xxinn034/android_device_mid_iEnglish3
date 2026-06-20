@@ -81,18 +81,45 @@ TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_USE_TOOLBOX := true
 
 # ========== 精简 TWRP 以减小 recovery.img 大小 ==========
-# 禁用 TWRP 官方 App（注意使用 INCLUDE 并设为 false）
+# 禁用 TWRP 官方 App (两种写法都加上)
 TW_INCLUDE_TWRPAPP := false
+TW_EXCLUDE_TWRPAPP := true
+
 # 禁用内置 SuperSU
 TW_INCLUDE_SUPERSU := false
+TW_EXCLUDE_SUPERSU := true
+
 # 禁用 "注入 TWRP" 功能
 TW_INCLUDE_INJECTTWRP := false
+TW_EXCLUDE_INJECTTWRP := true
+
 # 禁用截图功能 (fb2png)
 TW_INCLUDE_FB2PNG := false
+TW_EXCLUDE_FB2PNG := true
+
 # 禁用 NTFS 文件系统支持
 TW_INCLUDE_NTFS_3G := false
+TW_EXCLUDE_NTFS_3G := true
+
 # 禁用 Dumlock 功能
 TW_INCLUDE_DUMLOCK := false
-# 使用 LZ4 压缩 ramdisk
+TW_EXCLUDE_DUMLOCK := true
+
+# 禁用 Bash Shell (体积很大)
+TW_INCLUDE_BASH := false
+TW_EXCLUDE_BASH := true
+
+# 禁用 Nano 编辑器 (体积很大)
+TW_INCLUDE_NANO := false
+TW_EXCLUDE_NANO := true
+
+# 禁用 BusyBox (如果使用 Toolbox 则不需要)
+TW_INCLUDE_BUSYBOX := false
+TW_EXCLUDE_BUSYBOX := true
+
+# 禁用 zip/unzip (可选，但体积小，可保留)
+# TW_INCLUDE_ZIP := false
+
+# 使用 LZ4 压缩 ramdisk 以减小体积
 BOARD_RAMDISK_USE_LZ4 := true
 # ========================================================
