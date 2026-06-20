@@ -95,6 +95,7 @@ TW_EXCLUDE_NANO := true
 TW_EXCLUDE_BUSYBOX := true
 TW_EXCLUDE_ZIP := true
 TW_EXCLUDE_PIGZ := true
+TW_EXCLUDE_OPENSSL := true      # 若 pigz 依赖 openssl，一并排除
 
 # 移除加密支持（若你不需要解密 data 分区，可大幅减小体积）
 # 如果需要解密，请注释掉下面这行
@@ -116,7 +117,12 @@ TW_INCLUDE_NANO := false
 TW_INCLUDE_BUSYBOX := false
 TW_INCLUDE_PIGZ := false
 
-# 使用 LZ4 压缩 ramdisk 以减小体积
-BOARD_RAMDISK_USE_LZ4 := true
+# 尝试覆盖 PRODUCT_PACKAGES (某些版本支持)
+PRODUCT_PACKAGES := $(filter-out busybox bash nano pigz openaes twrpapp, $(PRODUCT_PACKAGES))
+
+# 使用 LZMA 压缩 ramdisk（比 LZ4 压缩率更高，体积更小）
+# 注释掉 LZ4，启用 LZMA
+# BOARD_RAMDISK_USE_LZ4 := true
+LZMA_RAMDISK_TARGETS := recovery
 
 # ====================================================
