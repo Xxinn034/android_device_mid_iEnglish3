@@ -79,3 +79,20 @@ TW_EXTRA_LANGUAGES := true
 TW_SCREEN_BLANK_ON_BOOT := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_USE_TOOLBOX := true
+
+# ========== 精简 TWRP 以减小 recovery.img 大小 ==========
+# 移除 TWRP 官方 App
+TW_EXCLUDE_TWRPAPP := true
+# 移除内置 SuperSU
+TW_EXCLUDE_SUPERSU := true
+# 移除 "注入 TWRP" 功能
+TW_EXCLUDE_INJECTTWRP := true
+# 移除截图功能 (fb2png)
+TW_EXCLUDE_FB2PNG := true
+# 移除 NTFS 文件系统支持
+TW_EXCLUDE_NTFS_3G := true
+# 移除 Dumlock 功能 (某些 HTC 设备的旧特性)
+TW_EXCLUDE_DUMLOCK := true
+# 使用 LZ4 压缩 ramdisk，显著减小体积
+BOARD_RAMDISK_USE_LZ4 := true
+# ========================================================
