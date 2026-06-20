@@ -73,53 +73,50 @@ PLATFORM_SECURITY_PATCH := 2099-12-31
 VENDOR_SECURITY_PATCH := 2099-12-31
 PLATFORM_VERSION := 16.1.0
 
-# TWRP Configuration
+# TWRP Configuration (保留 MTP 和 ADB)
 TW_THEME := portrait_hdpi
 TW_EXTRA_LANGUAGES := true
 TW_SCREEN_BLANK_ON_BOOT := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
-TW_USE_TOOLBOX := true
+TW_USE_TOOLBOX := true          # 使用 toolbox 替代 busybox，大幅减小体积
 
-# ========== 精简 TWRP 以减小 recovery.img 大小 ==========
-# 禁用 TWRP 官方 App (两种写法都加上)
-TW_INCLUDE_TWRPAPP := false
+# ========== 极致精简 TWRP（保留 MTP 和 ADB）==========
+# 移除 TWRP App、SuperSU、注入功能、截图、NTFS、Dumlock
 TW_EXCLUDE_TWRPAPP := true
-
-# 禁用内置 SuperSU
-TW_INCLUDE_SUPERSU := false
 TW_EXCLUDE_SUPERSU := true
-
-# 禁用 "注入 TWRP" 功能
-TW_INCLUDE_INJECTTWRP := false
 TW_EXCLUDE_INJECTTWRP := true
-
-# 禁用截图功能 (fb2png)
-TW_INCLUDE_FB2PNG := false
 TW_EXCLUDE_FB2PNG := true
-
-# 禁用 NTFS 文件系统支持
-TW_INCLUDE_NTFS_3G := false
 TW_EXCLUDE_NTFS_3G := true
-
-# 禁用 Dumlock 功能
-TW_INCLUDE_DUMLOCK := false
 TW_EXCLUDE_DUMLOCK := true
 
-# 禁用 Bash Shell (体积很大)
-TW_INCLUDE_BASH := false
+# 移除 Bash、Nano、Busybox、zip、pigz 等大型工具
 TW_EXCLUDE_BASH := true
-
-# 禁用 Nano 编辑器 (体积很大)
-TW_INCLUDE_NANO := false
 TW_EXCLUDE_NANO := true
-
-# 禁用 BusyBox (如果使用 Toolbox 则不需要)
-TW_INCLUDE_BUSYBOX := false
 TW_EXCLUDE_BUSYBOX := true
+TW_EXCLUDE_ZIP := true
+TW_EXCLUDE_PIGZ := true
 
-# 禁用 zip/unzip (可选，但体积小，可保留)
-# TW_INCLUDE_ZIP := false
+# 移除加密支持（若你不需要解密 data 分区，可大幅减小体积）
+# 如果需要解密，请注释掉下面这行
+TW_EXCLUDE_CRYPTO := true
+
+# 移除 exFAT 和 F2FS 支持（如果你不需要这些文件系统）
+TW_NO_EXFAT := true
+TW_NO_F2FS := true
+
+# 对应的 INCLUDE 设为 false (确保覆盖默认)
+TW_INCLUDE_TWRPAPP := false
+TW_INCLUDE_SUPERSU := false
+TW_INCLUDE_INJECTTWRP := false
+TW_INCLUDE_FB2PNG := false
+TW_INCLUDE_NTFS_3G := false
+TW_INCLUDE_DUMLOCK := false
+TW_INCLUDE_BASH := false
+TW_INCLUDE_NANO := false
+TW_INCLUDE_BUSYBOX := false
+TW_INCLUDE_PIGZ := false
 
 # 使用 LZ4 压缩 ramdisk 以减小体积
 BOARD_RAMDISK_USE_LZ4 := true
-# ========================================================
+
+# ====================================================
